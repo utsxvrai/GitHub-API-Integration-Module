@@ -16,5 +16,16 @@ if [ ${#@} -lt 2 ]; then
     exit 1;
 fi
 
+# Set the token and rest api
+
+token=$1
+rest=$2
+
+#active header for the request which is required for the github api also it tell the media type that is acceptable for the response
+# here we are using the v3 version of the github api which is the latest version which will give json response
+header="Accept: application/vnd.github.v3+json"  
+
+
+
 
 
