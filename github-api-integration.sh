@@ -1,13 +1,13 @@
-#!/bin/zsh
+#!/bin/bash
 ################################
 # Author: Utsav Rai
+# Date : 16 March, 2024
 # Version: v1
 #
 #
 #
 # This script will help users to communicate and retrieve information from GitHub
-# Usage:
-#   Please provide your github token and rest api to the script as input
+# Usage: Please provide your github token and rest api to the script as input
 #
 ################################
 
@@ -39,6 +39,19 @@ funtion get_response(){
 
 last_page=`curl -s -I "https://api.github.com${rest}" -H "${header}" -H "Authorization: token $token" | grep '^Link:' | sed -e 's/^Link:.*page=//g' -e 's/>.*$//g'`
 
+
+# if the last page is empty then we have only one page of result
+if [ -z "$last_page" ]; then
+    get_response "https://api.github.com${rest}"
+else
+    # if the last page is not empty then we have multiple pages of result
+    for ((i=1; i<=$last_page; i++)); do
+        get_response "https://api.github.com${rest}?page=$i"
+    done
+fi
+
+# print the response from the github api
+cat $tmpfile
 
 
 
