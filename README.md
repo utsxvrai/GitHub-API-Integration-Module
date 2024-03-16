@@ -40,4 +40,3 @@ Please provide your GitHub token and REST API expression as input to the script.
 
 Feel free to customize and enhance the script as needed for your specific use case.
 
-**typescript**
