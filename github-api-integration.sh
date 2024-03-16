@@ -31,7 +31,7 @@ temp=`basename $0`
 tmpfile=`mktemp /tmp/${temp}.XXXXXX` || exit 1
 
 #curl command to get the response from the github api
-funtion get_response(){
+function get_response {
     curl -s $1 -H "${header}" -H "Authorization: token $token" >> $tmpfile
 }
 
@@ -45,8 +45,8 @@ if [ -z "$last_page" ]; then
     get_response "https://api.github.com${rest}"
 else
     # if the last page is not empty then we have multiple pages of result
-    for ((i=1; i<=$last_page; i++)); do
-        get_response "https://api.github.com${rest}?page=$i"
+    for p in `seq 1 $last_page`; do
+        get_response "https://api.github.com${rest}?page=$p"
     done
 fi
 
