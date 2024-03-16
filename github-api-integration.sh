@@ -26,6 +26,24 @@ rest=$2
 header="Accept: application/vnd.github.v3+json"  
 
 
+# temp file to store the response from the github api
+temp=`basename $0`
+tmpfile=`mktemp /tmp/${temp}.XXXXXX` || exit 1
+
+#curl command to get the response from the github api
+funtion get_response(){
+    curl -s $1 -H "${header}" -H "Authorization: token $token" >> $tmpfile
+}
+
+# single page result-s (no pagination), have no Link: section, the grep result is empty
+
+last_page=`curl -s -I "https://api.github.com${rest}" -H "${header}" -H "Authorization: token $token" | grep '^Link:' | sed -e 's/^Link:.*page=//g' -e 's/>.*$//g'`
+
+
+
+
+
+
 
 
 
