@@ -1,6 +1,6 @@
-# GitHub API Integration Script
+## GitHub API Integration Script
 
-Author: Utsav Rai 
+Author: Utsav Rai
 Version: v1
 
 This script facilitates communication and information retrieval from GitHub using REST API calls.
